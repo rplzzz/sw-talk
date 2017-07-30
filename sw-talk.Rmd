@@ -6,7 +6,9 @@ output:
   revealjs::revealjs_presentation:
     transition: none
     theme: night
-    center: true
+    center: false
+    self_contained: false
+    reveal_plugins: ["notes"]
 ---
 
 ```{r setup, include=FALSE}
@@ -15,6 +17,52 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## {data-background="figs/rube-goldberg.png"}
 
----
+<aside class="notes">
+First step is to make sure you have code.  Even simple data prep and 
+analysis should be implemented in software.
+</aside>
 
+## The Big Pile of Scripts
+
+```R
+rm(list = ls())
+library('ggplot2')
+library('reshape2')
+library('ggthemes')
+library('dplyr')
+
+srcdir <- dirname(sys.frame(1)$ofile)
+source(file.path(srcdir,'food-demand.R'))
+source(file.path(srcdir,'food-demand-plots.R'))
+source(file.path(srcdir,'mcpar-analysis.R'))
+
+## read the observational data
+print('Reading data.')
+datadir <- normalizePath(file.path(srcdir, '../../data'))
+setwd(datadir)
+alldata <- read.csv('food-dmnd-price-allrgn.csv')
+
+## read the mc results:  we assume that the data has all been gzipped
+setwd('../runs')
+mcrslt.all <- read.mc.data('mc-food-dmnd.allrgn.dat.gz')
+```
+
+## The Big Pile of Scripts
+```R
+## find the maximum likelihood parameter sets
+pv.all <- mcparam.ML(mcrslt.all)        # vector for passing to mc.likelihood 
+p.all <- mc2param(pv.all)               # parameter struct for passing to food.dmnd
+pp.all <- mcrslt.all[which.max(mcrslt.all$LL),] # data frame for pretty-printing
+
+### plots that require just the observational data
+print('Running:  obs plots (output = hist.sigma)')
+## histogram of sigma values
+pltdata <- mutate(alldata, Nonstaples=sqrt(sig2Qn), Staples=sqrt(sig2Qs)) %>%
+    select(GCAM_region_name, year, Nonstaples, Staples) %>%
+    melt(id=c('GCAM_region_name', 'year'))
+
+hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
+    facet_grid(variable ~ .) + geom_histogram(binwidth=0.02) + theme_minimal() +
+    ggtitle('Imputed sigma values') + xlab('sigma (1000 cal/person/day)')
+```
 

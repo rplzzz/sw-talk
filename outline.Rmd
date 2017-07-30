@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Attributes of Good Scientific Software
 
 - Shareable
-- Repeatable
+- Reproducible
 - Organized 
 - Documented
 - Reuseable
