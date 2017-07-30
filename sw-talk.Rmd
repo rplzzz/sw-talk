@@ -6,6 +6,7 @@ output:
   revealjs::revealjs_presentation:
     transition: none
     theme: night
+    highlight: zenburn
     center: false
     self_contained: false
     reveal_plugins: ["notes"]
@@ -96,3 +97,4 @@ hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
  [97] "x1"                       "xval.rgn.trn"             "xval.rgn.tst"             "xval.yr.trn"             
 [101] "xval.yr.tst"              "y.vals"
 ```
+
