@@ -97,4 +97,12 @@ hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
  [97] "x1"                       "xval.rgn.trn"             "xval.rgn.tst"             "xval.yr.trn"             
 [101] "xval.yr.tst"              "y.vals"
 ```
+<aside class="notes">
+What are the problems here?
+
+* confusing
+* not reuseable
+* awkward workflow
+* non-portable
+</aside>
 
