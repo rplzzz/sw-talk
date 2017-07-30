@@ -536,13 +536,43 @@ pp.all &lt;-<span class="st"> </span>mcrslt.all[<span class="kw">which.max</span
 ### plots that require just the observational data
 <span class="kw">print</span>(<span class="st">&#39;Running:  obs plots (output = hist.sigma)&#39;</span>)
 ## histogram of sigma values
-pltdata &lt;-<span class="st"> </span><span class="kw">mutate</span>(obsdata, <span class="dt">Nonstaples=</span><span class="kw">sqrt</span>(sig2Qn), <span class="dt">Staples=</span><span class="kw">sqrt</span>(sig2Qs)) %&gt;%
+pltdata &lt;-<span class="st"> </span><span class="kw">mutate</span>(alldata, <span class="dt">Nonstaples=</span><span class="kw">sqrt</span>(sig2Qn), <span class="dt">Staples=</span><span class="kw">sqrt</span>(sig2Qs)) %&gt;%
 <span class="st">    </span><span class="kw">select</span>(GCAM_region_name, year, Nonstaples, Staples) %&gt;%
 <span class="st">    </span><span class="kw">melt</span>(<span class="dt">id=</span><span class="kw">c</span>(<span class="st">&#39;GCAM_region_name&#39;</span>, <span class="st">&#39;year&#39;</span>))
 
 hist.sigma &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>pltdata, <span class="kw">aes</span>(<span class="dt">x=</span>value)) +
 <span class="st">    </span><span class="kw">facet_grid</span>(variable ~<span class="st"> </span>.) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="fl">0.02</span>) +<span class="st"> </span><span class="kw">theme_minimal</span>() +
 <span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Imputed sigma values&#39;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&#39;sigma (1000 cal/person/day)&#39;</span>)</code></pre></div>
+</section>
+<section id="the-big-pile-of-scripts-aftermath" class="slide level2">
+<h1>The Big Pile of Scripts (Aftermath)</h1>
+<pre><code>&gt; ls()
+  [1] &quot;alldata&quot;                  &quot;apply.bc.rgn&quot;             &quot;apply.bias.corrections&quot;   &quot;calc.elas.actual&quot;        
+  [5] &quot;calc.hicks.actual&quot;        &quot;calc1eps&quot;                 &quot;calc1q&quot;                   &quot;chisq.all&quot;               
+  [9] &quot;chisq.rgn&quot;                &quot;chisq.rgn.trn&quot;            &quot;chisq.yr&quot;                 &quot;chisq.yr.trn&quot;            
+ [13] &quot;compute.bc.rgn&quot;           &quot;compute.bias.corrections&quot; &quot;datadir&quot;                  &quot;eta.constant&quot;            
+ [17] &quot;eta.n&quot;                    &quot;eta.s&quot;                    &quot;fit.with.err&quot;             &quot;food.dmnd&quot;               
+ [21] &quot;food.dmnd.byincome&quot;       &quot;food.dmnd.byyear&quot;         &quot;hist.sigma&quot;               &quot;lamks2epsy0&quot;             
+ [25] &quot;make.byincome.plot&quot;       &quot;make.byyear.plot&quot;         &quot;make.demand.plot&quot;         &quot;make.paper1.mc.plots&quot;    
+ [29] &quot;make.paper1.obs.plots&quot;    &quot;make.paper1.param.plots&quot;  &quot;mc.chunksize&quot;             &quot;mc.eval.fd.likelihood&quot;   
+ [33] &quot;mc.food.dmnd.byyear&quot;      &quot;mc.likelihood&quot;            &quot;mc.likelihood.1&quot;          &quot;mc.logfile&quot;              
+ [37] &quot;mc.make.byyear.plot&quot;      &quot;mc.obsdata&quot;               &quot;mc.setup&quot;                 &quot;mc.splitvec&quot;             
+ [41] &quot;mc2param&quot;                 &quot;mcparam.clip.tails&quot;       &quot;mcparam.density&quot;          &quot;mcparam.itercount&quot;       
+ [45] &quot;mcparam.ML&quot;               &quot;mcparam.sample&quot;           &quot;mcrslt.all&quot;               &quot;mcrslt.rgn&quot;              
+ [49] &quot;mcrslt.yr&quot;                &quot;merge.trn.tst&quot;            &quot;namemc&quot;                   &quot;p.all&quot;                   
+ [53] &quot;p.rgn&quot;                    &quot;p.yr&quot;                     &quot;paper1.bc.plots&quot;          &quot;paper1.chisq&quot;            
+ [57] &quot;paper1.fix.notation&quot;      &quot;paper1.gen.residual.data&quot; &quot;paper1.residual.analysis&quot; &quot;paper1.rmse.all&quot;         
+ [61] &quot;path&quot;                     &quot;plot.elas&quot;                &quot;plot.hicks&quot;               &quot;plot.qty&quot;                
+ [65] &quot;plts.bc&quot;                  &quot;plts.mc.all&quot;              &quot;plts.mc.rgn&quot;              &quot;plts.mc.yr&quot;              
+ [69] &quot;plts.param.all&quot;           &quot;Pm.vals&quot;                  &quot;pmax8&quot;                    &quot;pmax9&quot;                   
+ [73] &quot;pmin8&quot;                    &quot;pmin9&quot;                    &quot;Pn.vals&quot;                  &quot;pnscl&quot;                   
+ [77] &quot;pp.all&quot;                   &quot;pp.rgn&quot;                   &quot;pp.yr&quot;                    &quot;prepare.obs&quot;             
+ [81] &quot;process.gcam.data&quot;        &quot;Ps.vals&quot;                  &quot;psscl&quot;                    &quot;pv.all&quot;                  
+ [85] &quot;pv.rgn&quot;                   &quot;pv.yr&quot;                    &quot;read.mc.data&quot;             &quot;report.param.values&quot;     
+ [89] &quot;resid.stats&quot;              &quot;rmse.all&quot;                 &quot;samp.params&quot;              &quot;simplify.region&quot;         
+ [93] &quot;srcdir&quot;                   &quot;validate.params&quot;          &quot;vec2param&quot;                &quot;x0&quot;                      
+ [97] &quot;x1&quot;                       &quot;xval.rgn.trn&quot;             &quot;xval.rgn.tst&quot;             &quot;xval.yr.trn&quot;             
+[101] &quot;xval.yr.tst&quot;              &quot;y.vals&quot;</code></pre>
 </section>
     </div>
   </div>

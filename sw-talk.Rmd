@@ -66,3 +66,33 @@ hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
     ggtitle('Imputed sigma values') + xlab('sigma (1000 cal/person/day)')
 ```
 
+## The Big Pile of Scripts (Aftermath)
+```
+> ls()
+  [1] "alldata"                  "apply.bc.rgn"             "apply.bias.corrections"   "calc.elas.actual"        
+  [5] "calc.hicks.actual"        "calc1eps"                 "calc1q"                   "chisq.all"               
+  [9] "chisq.rgn"                "chisq.rgn.trn"            "chisq.yr"                 "chisq.yr.trn"            
+ [13] "compute.bc.rgn"           "compute.bias.corrections" "datadir"                  "eta.constant"            
+ [17] "eta.n"                    "eta.s"                    "fit.with.err"             "food.dmnd"               
+ [21] "food.dmnd.byincome"       "food.dmnd.byyear"         "hist.sigma"               "lamks2epsy0"             
+ [25] "make.byincome.plot"       "make.byyear.plot"         "make.demand.plot"         "make.paper1.mc.plots"    
+ [29] "make.paper1.obs.plots"    "make.paper1.param.plots"  "mc.chunksize"             "mc.eval.fd.likelihood"   
+ [33] "mc.food.dmnd.byyear"      "mc.likelihood"            "mc.likelihood.1"          "mc.logfile"              
+ [37] "mc.make.byyear.plot"      "mc.obsdata"               "mc.setup"                 "mc.splitvec"             
+ [41] "mc2param"                 "mcparam.clip.tails"       "mcparam.density"          "mcparam.itercount"       
+ [45] "mcparam.ML"               "mcparam.sample"           "mcrslt.all"               "mcrslt.rgn"              
+ [49] "mcrslt.yr"                "merge.trn.tst"            "namemc"                   "p.all"                   
+ [53] "p.rgn"                    "p.yr"                     "paper1.bc.plots"          "paper1.chisq"            
+ [57] "paper1.fix.notation"      "paper1.gen.residual.data" "paper1.residual.analysis" "paper1.rmse.all"         
+ [61] "path"                     "plot.elas"                "plot.hicks"               "plot.qty"                
+ [65] "plts.bc"                  "plts.mc.all"              "plts.mc.rgn"              "plts.mc.yr"              
+ [69] "plts.param.all"           "Pm.vals"                  "pmax8"                    "pmax9"                   
+ [73] "pmin8"                    "pmin9"                    "Pn.vals"                  "pnscl"                   
+ [77] "pp.all"                   "pp.rgn"                   "pp.yr"                    "prepare.obs"             
+ [81] "process.gcam.data"        "Ps.vals"                  "psscl"                    "pv.all"                  
+ [85] "pv.rgn"                   "pv.yr"                    "read.mc.data"             "report.param.values"     
+ [89] "resid.stats"              "rmse.all"                 "samp.params"              "simplify.region"         
+ [93] "srcdir"                   "validate.params"          "vec2param"                "x0"                      
+ [97] "x1"                       "xval.rgn.trn"             "xval.rgn.tst"             "xval.yr.trn"             
+[101] "xval.yr.tst"              "y.vals"
+```
