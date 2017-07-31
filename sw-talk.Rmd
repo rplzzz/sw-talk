@@ -65,6 +65,8 @@ pltdata <- mutate(alldata, Nonstaples=sqrt(sig2Qn), Staples=sqrt(sig2Qs)) %>%
 hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
     facet_grid(variable ~ .) + geom_histogram(binwidth=0.02) + theme_minimal() +
     ggtitle('Imputed sigma values') + xlab('sigma (1000 cal/person/day)')
+    
+ggsave('hist-sigma-v23.png')    
 ```
 
 ## The Big Pile of Scripts (Aftermath)
@@ -101,8 +103,67 @@ hist.sigma <- ggplot(data=pltdata, aes(x=value)) +
 What are the problems here?
 
 * confusing
+* side effects
 * not reuseable
 * awkward workflow
 * non-portable
+* not documented
 </aside>
 
+## Here's a Good Analysis Script
+
+```R
+run_analysis <- function(inputfile) {. . .}
+make_plots <- function(results) {. . .}
+## Run analysis. Results are a named list with the following elements:
+## (. . .)
+results <- run_analysis('input-data.csv')
+
+## Make common plots. Plots are returned in a list with the following elements:
+## (. . .)
+plots <- make_plots(results)
+```
+
+<aside class="notes">
+Minimal standard that fixes the worst problems.
+
+* Somewhat portable
+* Creates two functions and two objects
+* No side effects
+* Explains what the results are
+
+Still has problems.
+
+* Not completely portable
+* Inflexible workflow
+* Not reuseable
+
+BTW, much of this advice is really hard to put into practice in low-level languages like C++.
+</aside>
+
+## Use Your Language's Package System
+
+- R 
+    + _Writing R Packages_ ([http://r-pkgs.had.co.nz/](http://r-pkgs.had.co.nz/))
+- Python
+    + _How To Package Your Python Code_ <br/> ([https://python-packaging.readthedocs.io](https://python-packaging.readthedocs.io))
+- C++ (and other compiled languages) 
+    + CMake ([https://cmake.org](https://cmake.org))   ...**or**...
+
+## Use Your Language's Package System
+
+- R 
+    + _Writing R Packages_ ([http://r-pkgs.had.co.nz/](http://r-pkgs.had.co.nz/))
+- Python
+    + _How To Package Your Python Code_ <br/> ([https://python-packaging.readthedocs.io](https://python-packaging.readthedocs.io))
+- C++ (and other compiled languages) 
+    + CMake ([https://cmake.org](https://cmake.org))   ...**or**...
+    + Why not try Rcpp?  ([http://www.rcpp.org/](http://www.rcpp.org/))
+
+<aside class="notes">
+What does packaging do for you?
+
+* True portability
+* Package namespace
+* Makes a lot of the other advice easier to follow
+</aside>

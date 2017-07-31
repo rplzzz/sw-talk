@@ -543,7 +543,9 @@ pltdata &lt;-<span class="st"> </span><span class="kw">mutate</span>(alldata, <s
 
 hist.sigma &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>pltdata, <span class="kw">aes</span>(<span class="dt">x=</span>value)) +
 <span class="st">    </span><span class="kw">facet_grid</span>(variable ~<span class="st"> </span>.) +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="fl">0.02</span>) +<span class="st"> </span><span class="kw">theme_minimal</span>() +
-<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Imputed sigma values&#39;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&#39;sigma (1000 cal/person/day)&#39;</span>)</code></pre></div>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Imputed sigma values&#39;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&#39;sigma (1000 cal/person/day)&#39;</span>)
+    
+<span class="kw">ggsave</span>(<span class="st">&#39;hist-sigma-v23.png&#39;</span>)    </code></pre></div>
 </section>
 <section id="the-big-pile-of-scripts-aftermath" class="slide level2">
 <h1>The Big Pile of Scripts (Aftermath)</h1>
@@ -577,9 +579,83 @@ hist.sigma &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span cl
 <aside class="notes">
 <p>What are the problems here?</p>
 <ul>
-<li>non-portable</li>
 <li>confusing</li>
+<li>side effects</li>
 <li>not reuseable</li>
+<li>awkward workflow</li>
+<li>non-portable</li>
+<li>not documented</li>
+</ul>
+</aside>
+</section>
+<section id="heres-a-good-analysis-script" class="slide level2">
+<h1>Here’s a Good Analysis Script</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">run_analysis &lt;-<span class="st"> </span>function(inputfile) {. . .}
+make_plots &lt;-<span class="st"> </span>function(results) {. . .}
+## Run analysis. Results are a named list with the following elements:
+## (. . .)
+results &lt;-<span class="st"> </span><span class="kw">run_analysis</span>(<span class="st">&#39;input-data.csv&#39;</span>)
+
+## Make common plots. Plots are returned in a list with the following elements:
+## (. . .)
+plots &lt;-<span class="st"> </span><span class="kw">make_plots</span>(results)</code></pre></div>
+<aside class="notes">
+<p>Minimal standard that fixes the worst problems.</p>
+<ul>
+<li>Somewhat portable</li>
+<li>Creates two functions and two objects</li>
+<li>No side effects</li>
+<li>Explains what the results are</li>
+</ul>
+<p>Still has problems.</p>
+<ul>
+<li>Not completely portable</li>
+<li>Inflexible workflow</li>
+<li>Not reuseable</li>
+</ul>
+BTW, much of this advice is really hard to put into practice in low-level languages like C++.
+</aside>
+</section>
+<section id="use-your-languages-package-system" class="slide level2">
+<h1>Use Your Language’s Package System</h1>
+<ul>
+<li>R
+<ul>
+<li><em>Writing R Packages</em> (<a href="http://r-pkgs.had.co.nz/" class="uri">http://r-pkgs.had.co.nz/</a>)</li>
+</ul></li>
+<li>Python
+<ul>
+<li><em>How To Package Your Python Code</em> <br/> (<a href="https://python-packaging.readthedocs.io" class="uri">https://python-packaging.readthedocs.io</a>)</li>
+</ul></li>
+<li>C++ (and other compiled languages)
+<ul>
+<li>CMake (<a href="https://cmake.org" class="uri">https://cmake.org</a>) …<strong>or</strong>…</li>
+</ul></li>
+</ul>
+</section>
+<section id="use-your-languages-package-system-1" class="slide level2">
+<h1>Use Your Language’s Package System</h1>
+<ul>
+<li>R
+<ul>
+<li><em>Writing R Packages</em> (<a href="http://r-pkgs.had.co.nz/" class="uri">http://r-pkgs.had.co.nz/</a>)</li>
+</ul></li>
+<li>Python
+<ul>
+<li><em>How To Package Your Python Code</em> <br/> (<a href="https://python-packaging.readthedocs.io" class="uri">https://python-packaging.readthedocs.io</a>)</li>
+</ul></li>
+<li>C++ (and other compiled languages)
+<ul>
+<li>CMake (<a href="https://cmake.org" class="uri">https://cmake.org</a>) …<strong>or</strong>…</li>
+<li>Why not try Rcpp? (<a href="http://www.rcpp.org/" class="uri">http://www.rcpp.org/</a>)</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>What does packaging do for you?</p>
+<ul>
+<li>True portability</li>
+<li>Package namespace</li>
+<li>Makes a lot of the other advice easier to follow</li>
 </ul>
 </aside>
 </section>
