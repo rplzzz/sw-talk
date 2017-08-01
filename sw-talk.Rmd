@@ -10,13 +10,17 @@ output:
     center: false
     self_contained: false
     reveal_plugins: ["notes"]
+    reveal_options:
+      slideNumber: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## {data-background="figs/rube-goldberg.png"}
+## 
+
+<img src="figs/rube-goldberg.png" height=600>
 
 <aside class="notes">
 First step is to make sure you have code.  Even simple data prep and 
@@ -110,7 +114,7 @@ What are the problems here?
 * not documented
 </aside>
 
-## Here's a Good Analysis Script
+## A Good Analysis Script
 
 ```R
 run_analysis <- function(inputfile) {. . .}
@@ -165,5 +169,66 @@ What does packaging do for you?
 
 * True portability
 * Package namespace
+* System knows where to find supporting files
 * Makes a lot of the other advice easier to follow
 </aside>
+
+## Refactor Your Code
+
+```R
+read_and_clean_data <- function(filename) {. . .}
+
+calc_frobnitz_coef <- function(frobdata) {. . .}
+
+make_sankey_diagram <- function(pltdata) {. . .}
+```
+
+<aside class="notes">
+Each function should do _one_ conceptually unified thing.
+</aside>
+
+## Refactor Your Packages
+
+* expt1-data
+* my-utilities
+* my-analysis
+* expt1-paper
+
+## Use a Version Control System
+
+<aside class="notes">
+What version control does for you:
+
+* Reproducibility: can recover (and record!) the exact version of code/data used in a run
+* Rollback: good for comparisons, bug hunting, and reverting to known good state
+* History: *when* and *why* you did the things you did
+* Coordination: branching for parallel development
+</aside>
+
+## Use a Version Control System
+
+...and learn how to use it well
+
+[
+<img src="figs/git_2x.png"  alt="Don't be this guy!" height=400 style="float: right">
+](https://xkcd.com/1597)
+
+* **Git** <br> _Pro Git_ (https://git-scm.com/book)
+* **Mercurial** <br>_Hg Init: A Mercurial Tutorial_ (http://hginit.com)
+
+<aside class="notes">
+Git, especially, has a reputation for being difficult to learn.  Do not be put off by the ghost
+stories.  The scientific knowledge you have mastered is almost certainly more complex than that 
+needed to use git skillfully.
+</aside>
+
+## Develop Good Documentation
+
+...
+
+## Miscellaneous Tips
+
+* Use a public repository
+    + GitHub (git only)
+    + BitBucket (git or mercurial)
+* Practice frequent code review

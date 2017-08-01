@@ -498,8 +498,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">July 29, 2017</h3>
 </section>
 
-<section id="section" class="slide level2" data-background="figs/rube-goldberg.png">
+<section id="section" class="slide level2">
 <h1></h1>
+<p><img src="figs/rube-goldberg.png" height=600></p>
 <aside class="notes">
 First step is to make sure you have code. Even simple data prep and analysis should be implemented in software.
 </aside>
@@ -588,8 +589,8 @@ hist.sigma &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span cl
 </ul>
 </aside>
 </section>
-<section id="heres-a-good-analysis-script" class="slide level2">
-<h1>Here’s a Good Analysis Script</h1>
+<section id="a-good-analysis-script" class="slide level2">
+<h1>A Good Analysis Script</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">run_analysis &lt;-<span class="st"> </span>function(inputfile) {. . .}
 make_plots &lt;-<span class="st"> </span>function(results) {. . .}
 ## Run analysis. Results are a named list with the following elements:
@@ -655,9 +656,69 @@ BTW, much of this advice is really hard to put into practice in low-level langua
 <ul>
 <li>True portability</li>
 <li>Package namespace</li>
+<li>System knows where to find supporting files</li>
 <li>Makes a lot of the other advice easier to follow</li>
 </ul>
 </aside>
+</section>
+<section id="refactor-your-code" class="slide level2">
+<h1>Refactor Your Code</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">read_and_clean_data &lt;-<span class="st"> </span>function(filename) {. . .}
+
+calc_frobnitz_coef &lt;-<span class="st"> </span>function(frobdata) {. . .}
+
+make_sankey_diagram &lt;-<span class="st"> </span>function(pltdata) {. . .}</code></pre></div>
+<aside class="notes">
+Each function should do <em>one</em> conceptually unified thing.
+</aside>
+</section>
+<section id="refactor-your-packages" class="slide level2">
+<h1>Refactor Your Packages</h1>
+<ul>
+<li>expt1-data</li>
+<li>my-utilities</li>
+<li>my-analysis</li>
+<li>expt1-paper</li>
+</ul>
+</section>
+<section id="use-a-version-control-system" class="slide level2">
+<h1>Use a Version Control System</h1>
+<aside class="notes">
+<p>What version control does for you:</p>
+<ul>
+<li>Reproducibility: can recover (and record!) the exact version of code/data used in a run</li>
+<li>Rollback: good for comparisons, bug hunting, and reverting to known good state</li>
+<li>History: <em>when</em> and <em>why</em> you did the things you did</li>
+<li>Coordination: branching for parallel development</li>
+</ul>
+</aside>
+</section>
+<section id="use-a-version-control-system-1" class="slide level2">
+<h1>Use a Version Control System</h1>
+<p>…and learn how to use it well</p>
+<p><a href="https://xkcd.com/1597"><img src="figs/git_2x.png"  alt="Don't be this guy!" height=400 style="float: right"></a></p>
+<ul>
+<li><strong>Git</strong> <br> <em>Pro Git</em> (<a href="https://git-scm.com/book" class="uri">https://git-scm.com/book</a>)</li>
+<li><strong>Mercurial</strong> <br><em>Hg Init: A Mercurial Tutorial</em> (<a href="http://hginit.com" class="uri">http://hginit.com</a>)</li>
+</ul>
+<aside class="notes">
+Git, especially, has a reputation for being difficult to learn. Do not be put off by the ghost stories. The scientific knowledge you have mastered is almost certainly more complex than that needed to use git skillfully.
+</aside>
+</section>
+<section id="develop-good-documentation" class="slide level2">
+<h1>Develop Good Documentation</h1>
+<p>…</p>
+</section>
+<section id="miscellaneous-tips" class="slide level2">
+<h1>Miscellaneous Tips</h1>
+<ul>
+<li>Use a public repository
+<ul>
+<li>GitHub (git only)</li>
+<li>BitBucket (git or mercurial)</li>
+</ul></li>
+<li>Practice frequent code review</li>
+</ul>
 </section>
     </div>
   </div>
@@ -670,6 +731,8 @@ BTW, much of this advice is really hard to put into practice in low-level langua
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
         // Push each slide change to the browser history
         history: true,
         // Vertical centering of slides
