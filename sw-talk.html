@@ -707,7 +707,23 @@ Git, especially, has a reputation for being difficult to learn. Do not be put of
 </section>
 <section id="develop-good-documentation" class="slide level2">
 <h1>Develop Good Documentation</h1>
-<p>…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&#39; Calculate the Frobnitz coefficient</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; This version of the Frobnitz calculation follows the treatment in ...</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; There are three possible modes for the calculation. The &#39;normal&#39; mode ...</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; @param bflux Vector of bogon flux values in counts/m2</span>
+<span class="co">#&#39; @param mode String indicating the mode (see details). The default is &#39;normal&#39;</span>
+<span class="co">#&#39; @return Vector of Frobnitz coefficients (unitless)</span>
+calc_frob &lt;-<span class="st"> </span>function(bflux, <span class="dt">mode =</span> <span class="st">&#39;normal&#39;</span>) {
+  ...
+}</code></pre></div>
+<p>Use a documentation generator:</p>
+<ul>
+<li><strong>R</strong>: roxygen2 (<a href="http://roxygen.org" class="uri">http://roxygen.org</a>)</li>
+<li><strong>Python</strong>: sphinx (<a href="http://www.sphinx-doc.org" class="uri">http://www.sphinx-doc.org</a>)</li>
+</ul>
 </section>
 <section id="miscellaneous-tips" class="slide level2">
 <h1>Miscellaneous Tips</h1>

@@ -224,7 +224,24 @@ needed to use git skillfully.
 
 ## Develop Good Documentation
 
-...
+```R
+#' Calculate the Frobnitz coefficient
+#'
+#' This version of the Frobnitz calculation follows the treatment in ...
+#'
+#' There are three possible modes for the calculation. The 'normal' mode ...
+#'
+#' @param bflux Vector of bogon flux values in counts/m2
+#' @param mode String indicating the mode (see details). The default is 'normal'
+#' @return Vector of Frobnitz coefficients (unitless)
+calc_frob <- function(bflux, mode = 'normal') {
+  ...
+}
+```
+Use a documentation generator:
+
+* **R**: roxygen2 (http://roxygen.org)
+* **Python**: sphinx (http://www.sphinx-doc.org)
 
 ## Miscellaneous Tips
 

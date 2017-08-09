@@ -1,5 +1,5 @@
 ---
-title: "Outline"
+title: "Development notes"
 author: "Robert Link"
 date: "July 29, 2017"
 output: html_document
@@ -9,10 +9,34 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Attributes of Good Scientific Software
 
-- Shareable
-- Reproducible
-- Organized 
-- Documented
-- Reuseable
+## Rebinding keys
+
+http://sys-exit.blogspot.com/2015/10/revealjs-presentation-pilot-up-down-left-right.html
+
+### Excerpt 
+
+go to the speaker view tab (the private one) and do following sequence:
+open press F12 to open developer tools (works with chrome, firefox and IE10)
+switch to console tab
+paste this code and execute it:
+Reveal.configure({
+  keyboard: {
+    40: 'next',
+    38: 'prev'
+  }
+});
+press F12 again to close the developer tools
+
+Slides.com (and reveal.js itself) works in the browser and browsers have its own key codes which you can use in JavaScript code. This is the important part of the table:
+
+left arrow	37
+up arrow	38
+right arrow	39
+down arrow	40
+
+It should be possible to make this load automatically via an appropriate include.
+
+### Javascript key codes
+
+https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
