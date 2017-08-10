@@ -1,7 +1,7 @@
 ---
 title: "Stop Writing Bad Science Code"
 author: "Robert Link"
-date: "July 29, 2017"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   revealjs::revealjs_presentation:
     transition: none
@@ -243,9 +243,19 @@ Use a documentation generator:
 * **R**: roxygen2 (http://roxygen.org)
 * **Python**: sphinx (http://www.sphinx-doc.org)
 
+## Use a Profiler to Figure Out Why Your Code is Slow
+
+<img src="figs/profile.png" height=500>
+
 ## Miscellaneous Tips
 
 * Use a public repository
     + GitHub (git only)
     + BitBucket (git or mercurial)
 * Practice frequent code review
+* Critique yourself retrospectively
+* Use good judgement
+
+## Slides and Notes
+
+https://rplzzz.github.io/sw-talk
