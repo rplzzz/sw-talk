@@ -243,6 +243,36 @@ Use a documentation generator:
 * **R**: roxygen2 (http://roxygen.org)
 * **Python**: sphinx (http://www.sphinx-doc.org)
 
+<aside class="notes">
+Another example: if you have an argument called "file", tell the user whether it's a string (file name) or 
+a file handle.
+</aside>
+
+## Write a Test Suite
+Testing science codes is hard because often you don't know the correct answer.
+
+```sh
+#!/usr/bin/env bash
+
+# Run the basic RCPs
+$HECTOR input/hector_rcp45.ini
+$HECTOR input/hector_rcp85.ini
+
+# Make sure the model handles year changes
+sed 's/startDate=1745/startDate=1740/' input/hector_rcp45.ini > input/hector_rcp45_time.ini
+$HECTOR input/hector_rcp45_time.ini
+
+# Turn on the constraint settings one by one and run the model
+# CO2
+sed 's/;Ca_constrain=csv:constraints\/lawdome_co2.csv/Ca_constrain=csv:constraints\/lawdome_co2.csv/' input/hector_rcp45.ini > input/hector_rcp45_co2.ini
+$HECTOR input/hector_rcp45_co2.ini
+```
+
+* Verify that the code runs in all of its modes.
+* Where possible, compare to reference output.
+* Generate a set of diagnostic figures.
+* Thoroughly test utility functions.
+
 ## Use a Profiler to Figure Out Why Your Code is Slow
 
 <img src="figs/profile.png" height=500>
@@ -254,7 +284,20 @@ Use a documentation generator:
     + BitBucket (git or mercurial)
 * Practice frequent code review
 * Critique yourself retrospectively
+* Do periodic spring cleaning
 * Use good judgement
+
+<aside class="notes">
+* GitHub and BitBucket  
+    + ... provide tools that make following a lot of the other advice easier
+    + ... make collaboration easier
+    + People worry too much about getting "scooped" by making their code public. Your competitors almost certainly 
+  have better things to do than scraping GitHub for project ideas.
+* Start your code reviews early.  A reviewer looking at 100 lines of code will likely do a thorough job.  A reviewer
+looking at 1000 lines of code will get bogged down understanding the code and focus on trivia.
+* Spring cleaning: especially, don't keep obsolete code/data around "just in case".  That sort of cruft has a way
+of making it into production results unintentionally.
+</aside>
 
 ## Slides and Notes
 

@@ -494,7 +494,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Stop Writing Bad Science Code</h1>
     <h2 class="author">Robert Link</h2>
-    <h3 class="date">10 August, 2017</h3>
+    <h3 class="date">19 August, 2017</h3>
 </section>
 
 <section id="section" class="slide level2">
@@ -723,6 +723,33 @@ calc_frob &lt;-<span class="st"> </span>function(bflux, <span class="dt">mode =<
 <li><strong>R</strong>: roxygen2 (<a href="http://roxygen.org" class="uri">http://roxygen.org</a>)</li>
 <li><strong>Python</strong>: sphinx (<a href="http://www.sphinx-doc.org" class="uri">http://www.sphinx-doc.org</a>)</li>
 </ul>
+<aside class="notes">
+Another example: if you have an argument called “file”, tell the user whether it’s a string (file name) or a file handle.
+</aside>
+</section>
+<section id="write-a-test-suite" class="slide level2">
+<h1>Write a Test Suite</h1>
+<p>Testing science codes is hard because often you don’t know the correct answer.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+
+<span class="co"># Run the basic RCPs</span>
+<span class="ot">$HECTOR</span> <span class="kw">input/hector_rcp45.ini</span>
+<span class="ot">$HECTOR</span> <span class="kw">input/hector_rcp85.ini</span>
+
+<span class="co"># Make sure the model handles year changes</span>
+<span class="kw">sed</span> <span class="st">&#39;s/startDate=1745/startDate=1740/&#39;</span> input/hector_rcp45.ini <span class="kw">&gt;</span> input/hector_rcp45_time.ini
+<span class="ot">$HECTOR</span> <span class="kw">input/hector_rcp45_time.ini</span>
+
+<span class="co"># Turn on the constraint settings one by one and run the model</span>
+<span class="co"># CO2</span>
+<span class="kw">sed</span> <span class="st">&#39;s/;Ca_constrain=csv:constraints\/lawdome_co2.csv/Ca_constrain=csv:constraints\/lawdome_co2.csv/&#39;</span> input/hector_rcp45.ini <span class="kw">&gt;</span> input/hector_rcp45_co2.ini
+<span class="ot">$HECTOR</span> <span class="kw">input/hector_rcp45_co2.ini</span></code></pre></div>
+<ul>
+<li>Verify that the code runs in all of its modes.</li>
+<li>Where possible, compare to reference output.</li>
+<li>Generate a set of diagnostic figures.</li>
+<li>Thoroughly test utility functions.</li>
+</ul>
 </section>
 <section id="use-a-profiler-to-figure-out-why-your-code-is-slow" class="slide level2">
 <h1>Use a Profiler to Figure Out Why Your Code is Slow</h1>
@@ -738,8 +765,21 @@ calc_frob &lt;-<span class="st"> </span>function(bflux, <span class="dt">mode =<
 </ul></li>
 <li>Practice frequent code review</li>
 <li>Critique yourself retrospectively</li>
+<li>Do periodic spring cleaning</li>
 <li>Use good judgement</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>GitHub and BitBucket
+<ul>
+<li>… provide tools that make following a lot of the other advice easier</li>
+<li>… make collaboration easier</li>
+<li>People worry too much about getting “scooped” by making their code public. Your competitors almost certainly have better things to do than scraping GitHub for project ideas.</li>
+</ul></li>
+<li>Start your code reviews early. A reviewer looking at 100 lines of code will likely do a thorough job. A reviewer looking at 1000 lines of code will get bogged down understanding the code and focus on trivia.</li>
+<li>Spring cleaning: especially, don’t keep obsolete code/data around “just in case”. That sort of cruft has a way of making it into production results unintentionally.</li>
+</ul>
+</aside>
 </section>
 <section id="slides-and-notes" class="slide level2">
 <h1>Slides and Notes</h1>
